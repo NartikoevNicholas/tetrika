@@ -67,8 +67,7 @@ if __name__ == '__main__':
     # Б: 412
     # В:....
     print("Задача №2")
-    # proxy_list: list = open("proxy.txt").read().split("\n")
-    # ua_list: list = open("ua.txt").read().split("\n")
+
     update()
     with Pool(16) as pool:
         result_list = pool.map(handler, alphabet_list)
