@@ -1,5 +1,4 @@
 import time
-from update_proxy_useragent import update
 from multiprocessing import Pool
 from const import tests, alphabet_list, url_wikipedia
 from functions import *
@@ -67,12 +66,8 @@ if __name__ == '__main__':
     # Б: 412
     # В:....
     print("Задача №2")
-    # proxy_list: list = open("proxy.txt").read().split("\n")
-    # ua_list: list = open("ua.txt").read().split("\n")
-    update()
-    with Pool(16) as pool:
-        result_list = pool.map(handler, alphabet_list)
-    print(result_list)
+    
+
 
     # Задача №3
     # Мы сохраняем время присутствия каждого пользователя на уроке в виде интервалов. В функцию передается словарь,
