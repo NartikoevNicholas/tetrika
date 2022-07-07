@@ -42,17 +42,19 @@ def get_main_html(url, proxy_list: list, ua_list: list) -> requests:
             return result
 
 
-def get_data(url: str, character: str, proxy: list, user_agent: list) -> list:
-    result = []
+def get_data(url: str) -> dict:
+    result = {}
     while True:
-        html = get_main_html(url, proxy, user_agent)
+        html = get_html(url)
         soup = BeautifulSoup(html.text, 'lxml')
         list_animals = soup.find_all("div", class_="mw-content-ltr")[-1].find("ul").find_all("li")
         for animal in list_animals:
-            if animal.text[0] == character:
-                result.append(animal.text)
-            else:
+            if animal.text[0] == "A": # "A" - английская буква
                 return result
+            if result.keys().__contains__(animal.text[0]) is False:
+                result[animal.text[0]] = 1
+            else:
+                result[animal.text[0]] += 1
         url = url_main + unquote(soup.find("a", text="Следующая страница")['href'])
 
 

@@ -1,11 +1,7 @@
 url_main = "https://ru.wikipedia.org/"
-url_wikipedia: str = "https://ru.wikipedia.org/w/index.php?title=Категория%3AЖивотные_по_алфавиту&from="
+url_wikipedia: str = "https://ru.wikipedia.org/w/index.php?title=Категория%3AЖивотные_по_алфавиту&from=А"
 user_agent: dict = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36',
                     'accept': '*/*'}
-
-alphabet_list: list = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У',
-                       'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Э', 'Ю', 'Я']
-
 
 tests: list = [
     {'data': {'lesson': [1594663200, 1594666800],

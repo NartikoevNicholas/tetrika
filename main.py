@@ -1,6 +1,5 @@
 import time
-from multiprocessing import Pool
-from const import tests, alphabet_list, url_wikipedia
+from const import tests, url_wikipedia
 from functions import *
 
 
@@ -20,11 +19,8 @@ def task(array: str) -> int:
             h -= get_index(h - h_temp)
 
 
-def handler(character):
-    proxy_list: list = open("proxy.txt").read().split("\n")
-    ua_list: list = open("ua.txt").read().split("\n")
-    result: list = get_data(url_wikipedia.replace("from=", f"from={character}"), character, proxy_list, ua_list)
-    return f"{character}: {len(result)}\n"
+def handler() -> dict:
+    return get_data(url_wikipedia)
 
 
 def appearance(intervals):
@@ -66,8 +62,8 @@ if __name__ == '__main__':
     # Б: 412
     # В:....
     print("Задача №2")
-    
-
+    alphabet_dict = handler()
+    print(alphabet_dict)
 
     # Задача №3
     # Мы сохраняем время присутствия каждого пользователя на уроке в виде интервалов. В функцию передается словарь,
