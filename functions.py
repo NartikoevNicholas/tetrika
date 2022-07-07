@@ -42,17 +42,17 @@ def get_main_html(url, proxy_list: list, ua_list: list) -> requests:
             return result
 
 
-def get_data(url: str, character: str, proxy: list, user_agent: list) -> list:
+def get_data(url: str, proxy: list, user_agent: list) -> list:
     result = []
     while True:
         html = get_main_html(url, proxy, user_agent)
         soup = BeautifulSoup(html.text, 'lxml')
-        list_animals = soup.find_all("div", class_="mw-content-ltr")[-1].find("ul").find_all("li")
+        group = soup.find_all("div", lang="ru", class_="mw-content-ltr")[-1].find_all("div", class_="mw-category-group")
+        list_animals = group[0].find_all("li")
         for animal in list_animals:
-            if animal.text[0] == character:
-                result.append(animal.text)
-            else:
-                return result
+            result.append(animal.text)
+        if len(group) == 2:
+            return result
         url = url_main + unquote(soup.find("a", text="Следующая страница")['href'])
 
 

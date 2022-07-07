@@ -24,8 +24,8 @@ def task(array: str) -> int:
 def handler(character):
     proxy_list: list = open("proxy.txt").read().split("\n")
     ua_list: list = open("ua.txt").read().split("\n")
-    result: list = get_data(url_wikipedia.replace("from=", f"from={character}"), character, proxy_list, ua_list)
-    return f"{character}: {len(result)}\n"
+    result: list = get_data(url_wikipedia.replace("from=", f"from={character}"), proxy_list, ua_list)
+    return f"{character}: {len(result)}"
 
 
 def appearance(intervals):
