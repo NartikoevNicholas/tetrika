@@ -30,6 +30,21 @@ def get_list(data_list: list, count: int = 0) -> list:
         return result
 
 
+# Функция возвращает list животных для конкретной буквы
+def get_data(url: str, proxy: list, user_agent: list) -> list:
+    result: list = []
+    while True:
+        html: requests = get_main_html(url, proxy, user_agent)
+        soup: BeautifulSoup = BeautifulSoup(html.text, 'lxml')
+        group: list = soup.find_all("div", lang="ru", class_="mw-content-ltr")[-1].find_all("div", class_="mw-category-group")
+        list_animals: list = group[0].find_all("li")
+        for animal in list_animals:
+            result.append(animal.text)
+        if len(group) == 2:
+            return result
+        url = url_main + unquote(soup.find("a", text="Следующая страница")['href'])
+
+
 # Функция, которая получает html страницу
 def get_main_html(url, proxy_list: list, ua_list: list) -> requests:
     while True:
@@ -40,20 +55,6 @@ def get_main_html(url, proxy_list: list, ua_list: list) -> requests:
         result: requests = get_html(url, headers, proxies)
         if result is not None and result.status_code == 200:
             return result
-
-
-def get_data(url: str, proxy: list, user_agent: list) -> list:
-    result = []
-    while True:
-        html = get_main_html(url, proxy, user_agent)
-        soup = BeautifulSoup(html.text, 'lxml')
-        group = soup.find_all("div", lang="ru", class_="mw-content-ltr")[-1].find_all("div", class_="mw-category-group")
-        list_animals = group[0].find_all("li")
-        for animal in list_animals:
-            result.append(animal.text)
-        if len(group) == 2:
-            return result
-        url = url_main + unquote(soup.find("a", text="Следующая страница")['href'])
 
 
 # вспомогательная функция

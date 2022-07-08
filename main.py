@@ -21,18 +21,18 @@ def task(array: str) -> int:
             h -= get_index(h - h_temp)
 
 
-def handler(character):
+def handler(character) -> str:
     proxy_list: list = open("proxy.txt").read().split("\n")
     ua_list: list = open("ua.txt").read().split("\n")
     result: list = get_data(url_wikipedia.replace("from=", f"from={character}"), proxy_list, ua_list)
     return f"{character}: {len(result)}"
 
 
-def appearance(intervals):
+def appearance(intervals) -> int:
     result: int = 0
-    list_lesson = get_list(intervals['lesson'])
-    list_pupil = get_list(intervals['pupil'])
-    list_tutor = get_list(intervals['tutor'])
+    list_lesson: list = get_list(intervals['lesson'])
+    list_pupil: list = get_list(intervals['pupil'])
+    list_tutor: list = get_list(intervals['tutor'])
 
     for _ in range(len(list_lesson)):
         if list_pupil.__contains__(list_lesson[_]) and list_tutor.__contains__(list_lesson[_]):
@@ -46,17 +46,22 @@ if __name__ == '__main__':
     # за которыми следует какое-то количество подряд идущих нулей: 111111111111111111111111100000000
     print("Задача №1")
 
+    count_one: int = 2324323200
+    count_zero: int = 999999999
     # массив единиц и нулей -> string
-    array_string = get_array(2000000000, 1000000000)
+    array_string = get_array(count_one, count_zero)
+    print(f"Массив длиной элементов {count_one + count_zero}, "
+          f"где количество единиц равно {count_one}, а нулей {count_zero}.")
+
     # мое решение
     start = time.time()
-    index = task(array_string)
+    index: int = task(array_string)
     end = time.time()
     print(f"Мое решение: {index}. Время: {end - start}")
 
     # решение python
     start = time.time()
-    index = array_string.index("0")
+    index: int = array_string.index("0")
     end = time.time()
     print(f"Решение python: {index}. Время: {end - start}")
 
@@ -70,8 +75,9 @@ if __name__ == '__main__':
 
     update()
     with Pool(16) as pool:
-        result_list = pool.map(handler, alphabet_list)
-    print(result_list)
+        result_list: list = pool.map(handler, alphabet_list)
+    for el in result_list:
+        print(el)
 
     # Задача №3
     # Мы сохраняем время присутствия каждого пользователя на уроке в виде интервалов. В функцию передается словарь,

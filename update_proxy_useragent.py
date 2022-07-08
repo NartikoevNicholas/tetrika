@@ -3,7 +3,8 @@ from const import user_agent
 from functions import get_html, BeautifulSoup, get_ip
 
 
-def update() -> any:
+# Функция, которая создает или обновляет 2 файла, proxy.txt и ua.txt
+def update():
     if input("Обновить список юзер агентов и прокси?[y/n]:") == "y":
         result: list = []
         url_proxy: str = "https://hidemy.name/ru/proxy-list/?maxtime=1400&type=h&anon=34&start=#list"
@@ -22,11 +23,11 @@ def update() -> any:
             for i in result:
                 try:
                     file.write(str(i['http']) + "\n")
-                except Exception as KeyError:
+                except KeyError:
                     print(KeyError)
             file.close()
         url_ua: str = "https://seolik.ru/user-agents-list"
-        page_ua = get_html(url_ua, user_agent)
+        page_ua: requests = get_html(url_ua, user_agent)
         list_user_agent = (BeautifulSoup(page_ua.text, "lxml").find("div", class_="table-responsive")).find_all("tr")
         with open("ua.txt", "w+") as file:
             for i in list_user_agent:
