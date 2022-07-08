@@ -46,7 +46,7 @@ if __name__ == '__main__':
     # за которыми следует какое-то количество подряд идущих нулей: 111111111111111111111111100000000
     print("Задача №1")
 
-    count_one: int = 2324323200
+    count_one: int = 123213213
     count_zero: int = 999999999
     # массив единиц и нулей -> string
     array_string = get_array(count_one, count_zero)
@@ -59,11 +59,11 @@ if __name__ == '__main__':
     end = time.time()
     print(f"Мое решение: {index}. Время: {end - start}")
 
-    # решение python
+    # решение поиск по списку
     start = time.time()
     index: int = array_string.index("0")
     end = time.time()
-    print(f"Решение python: {index}. Время: {end - start}")
+    print(f"Решение поиск по списку: {index}. Время: {end - start}")
 
     # Задача №2.
     # Получить с русской википедии список всех животных (https://inlnk.ru/jElywR) и вывести количество животных на
